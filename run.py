@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request
 import sqlite3
+DB_NAME = 'board.db'
 app = Flask(__name__)
+
 @app.route("/")
 def run():
-	conn = sqlite3.connect('wanggun.db')
+	conn = sqlite3.connect(DB_NAME)
 	conn.row_factory=sqlite3.Row
 	c = conn.cursor()
 	c.execute('SELECT * FROM general')
@@ -13,7 +15,7 @@ def run():
 def modi():
    id = request.args.get("id") 
    
-   conn = sqlite3.connect('wanggun.db')
+   conn = sqlite3.connect(DB_NAME)
    conn.row_factory=sqlite3.Row
    c = conn.cursor()
    c.execute('SELECT * FROM general where id='+str(id))
@@ -27,7 +29,7 @@ def addrec():
          war = request.form['war']
          id = request.form['id']
          
-         with sqlite3.connect("wanggun.db") as con:
+         with sqlite3.connect(DB_NAME) as con:
             cur = con.cursor()
             
             cur.execute("update general set war="+str(war)+" where id="+str(id))

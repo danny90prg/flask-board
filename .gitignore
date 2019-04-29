@@ -26,3 +26,6 @@ htmlcov/
 Include/
 Lib/
 Scripts/
+
+# db
+*.db
